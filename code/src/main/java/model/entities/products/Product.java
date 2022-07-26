@@ -2,11 +2,27 @@ package model.entities.products;
 
 import model.entities.Entity;
 
+import javax.persistence.*;
+
+@Table(name = "products")
+@javax.persistence.Entity()
 public class Product extends Entity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
     private String name;
+
     private String description;
+
+    @Column(nullable = false, columnDefinition = "UNSIGNED")
     private double salePrice;
+
+    @Column(nullable = false, columnDefinition = "UNSIGNED")
     private double purchasePrice;
+
+    @Column(nullable = false, unique = true)
     private String barCode;
 
     public Product(){

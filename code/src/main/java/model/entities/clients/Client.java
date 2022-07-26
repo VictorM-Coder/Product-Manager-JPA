@@ -2,8 +2,19 @@ package model.entities.clients;
 
 import model.entities.Entity;
 
+import javax.persistence.*;
+
+@javax.persistence.Entity
+@Table(name = "clients")
 public class Client extends Entity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = true, unique = true)
     private String cpf;
 
    public Client(){

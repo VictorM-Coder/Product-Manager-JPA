@@ -2,11 +2,23 @@ package model.entities.products;
 
 import model.entities.Entity;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@javax.persistence.Entity
+@Table(name = "stock_products")
 public class StockProduct extends Entity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
     private Product product;
+
+    @Column(nullable = false, columnDefinition = "UNSIGNED")
     private int quantity;
+
+    @Column(nullable = false, columnDefinition = "UNSIGNED")
     private LocalDate validity;
 
     public StockProduct(){
