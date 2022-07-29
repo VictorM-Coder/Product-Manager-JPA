@@ -5,7 +5,7 @@ import model.entities.Entity;
 import javax.persistence.*;
 
 @Table(name = "products")
-@javax.persistence.Entity()
+@javax.persistence.Entity
 public class Product extends Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,10 +16,10 @@ public class Product extends Entity {
 
     private String description;
 
-    @Column(nullable = false, columnDefinition = "UNSIGNED")
+    @Column(nullable = false)
     private double salePrice;
 
-    @Column(nullable = false, columnDefinition = "UNSIGNED")
+    @Column(nullable = false)
     private double purchasePrice;
 
     @Column(nullable = false, unique = true)

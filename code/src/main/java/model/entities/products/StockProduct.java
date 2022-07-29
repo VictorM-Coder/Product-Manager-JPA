@@ -15,10 +15,10 @@ public class StockProduct extends Entity {
     @ManyToOne
     private Product product;
 
-    @Column(nullable = false, columnDefinition = "UNSIGNED")
+    @Column(nullable = false)
     private int quantity;
 
-    @Column(nullable = false, columnDefinition = "UNSIGNED")
+    @Column(nullable = false)
     private LocalDate validity;
 
     public StockProduct(){
@@ -47,6 +47,10 @@ public class StockProduct extends Entity {
         if (product != null){
             this.product = product;
         }
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public int getQuantity() {

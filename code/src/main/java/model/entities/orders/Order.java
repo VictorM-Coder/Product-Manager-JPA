@@ -3,19 +3,26 @@ package model.entities.orders;
 import model.entities.Entity;
 import model.entities.clients.Client;
 import model.entities.products.Product;
+import model.entities.products.StockProduct;
 import model.enums.SortType;
 import services.managers.Manager;
 
-import javax.persistence.Column;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@javax.persistence.Entity
+@Table(name = "orders")
 public class Order extends Entity implements Manager<Product> {
-    @Column(nullable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private Client client;
 
-    @Column(nullable = false)
-    private List<Product> products;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<StockProduct> stockProducts;
 
     public Order(){
 
@@ -23,12 +30,12 @@ public class Order extends Entity implements Manager<Product> {
     
     public Order(Client client){
         this.setClient(client);
-        this.products = new ArrayList<>();
+        this.stockProducts = new ArrayList<>();
     }
 
-    public Order(Client client, List<Product> products){
+    public Order(Client client, List<StockProduct> stockProducts){
         this(client);
-        this.products = products;
+        this.stockProducts = stockProducts;
     }
 
     @Override
@@ -64,7 +71,15 @@ public class Order extends Entity implements Manager<Product> {
         this.client = client;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public List<StockProduct> getStockProducts() {
+        return this.stockProducts;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
